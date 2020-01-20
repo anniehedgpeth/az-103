@@ -1,4 +1,4 @@
-# AZ-103 Study Sheet
+# AZ-103 Microsoft Certified: Azure Administrator Associate – Skills Measured (Study Sheets)
 
 ## Tutorials
 
