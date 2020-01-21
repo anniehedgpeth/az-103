@@ -67,6 +67,18 @@
 * manage Azure AD Connect
 * manage password sync and password writeback
 
+| AD Connect Components | AD Connect Sync Features |
+|----|----|
+| Synchronization Services | Filtering |
+| Active Directory Federation Services (optional) | Password Hash Sync (on-prem to cloud) |
+| Health Monitoring | Password writeback<br/>Device writeback<br/>Prevent accidental deletes<br/>Automatic upgrade |
+
+| **Password Sync Options** | desc |
+|----|----|
+| Password Sync | Ensures user passwords are the same in both directories (AD DS and Azure AD) |
+| Passthrough Authentication | Easy method to keep users and passwords aligned. When a user logs into Azure AD, the request is forwarded to AD DS. Essentially, a single source. |
+| AD FS | Use AD Federation Services server to fully federate across AD DS and Azure AD, along with other services. |
+
 | **Domain Services** | |
 |----|----|
 | Azure AD (AAD) | • Modern AD service built directly for the cloud<br/>• Often the same as O365 directory service<br/>• Can sync with On-prem directory service<br/>• Enterprise Identity Solution<br/>• Single Sign-on<br/>• Multi-factor Authentication (MFA)<br/>• Self-service (i.e. password reset) |
@@ -79,6 +91,27 @@
 | Hybrid AD w/password sync | • On-premises Active Directory is the « master » <br/> • Users and Groups are synchronized to Azure Active Directory using ADConnect (or MIM or 3rd party)<br/> • Password is synced encrypted out of ADConnect (or MIM or 3rd party) |
 | Hybrid AD w/Federation | • Relies on ADConnect to synchronize objects<br/> • ADFS or 3rd party Federation engine, running on-premises or in Azure VMs (with S2S or ER)|
 | Hybrid AD w/PassThrough Authentication | • Relies on ADConnect to synchronize objects<br/> • Instead of ADFS federation, deploy the PTA agents on on-premises servers (ADDS DCs)|
+
+**Active Directory Pricing Details**
+
+| Common Features | Free | Basic | Premium P1 | Premium P2 |
+|----|----|----|----|----|
+| Directory Objects | 500,000 Object Limit | No Object Limit | No Object Limit | No Object Limit |
+| Single Sign-On (SSO) | 10 apps per user | 10 apps per user | No Limit | No Limit |
+| Group-based access mgmt/provisioning | no | yes | yes | yes |
+| Self-Service Password reset for cloud users | no | yes | yes | yes |
+| Company Branding | no | yes | yes | yes |
+| Application Proxy | no | yes | yes | yes |
+| SLA | no | yes | yes | yes |
+| Self-Service Password reset/change/unlock with on-prem write-back | no | no | yes | yes |
+| Device objects two-way sync b/w on-prem directories and Azure AD (Device write-back) | no | no | yes | yes |
+| MFA (Cloud and on-prem (MFA server)) | limited | limited | yes | yes |
+| Identity Protection | no | no | no | yes |
+| Privileged Identity Management | no | no | no | yes |
+| 3rd Party MFA Partner Integration | no | no | no | yes |
+| SharePoint Limited Access | no | no | no | yes |
+
+
 
 ## Implement multi-factor authentication (MFA)
 
@@ -138,3 +171,4 @@ Set-MsolUser
    [-TenantId <Guid>]
    [<CommonParameters>]
 ```
+
