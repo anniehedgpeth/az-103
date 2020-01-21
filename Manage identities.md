@@ -52,17 +52,18 @@
 
 | Azure Active Directory Conditional Access |  if a user wants to access a resource, then they must complete an action |
 |----|----|
-| Users and groups | In your policy, you can either select All users or select specific users and groups. When you Select users and groups, you can set the following options:<br/>• All guest users<br/>• Directory roles<br/>• Users and groups |
-| Cloud apps and actions | Mandatory in a Conditional Access policy. In your policy, you can either select:<br/>• All cloud apps or<br/>• specify apps with Select apps.|
+| Users and groups | In your policy, you can either select All users or select specific users and groups. When you Select users and groups, you can set the following options:<br/>* All guest users<br/>* Directory roles<br/>* Users and groups |
+| Cloud apps and actions | Mandatory in a Conditional Access policy. In your policy, you can either select:<br/>* All cloud apps or<br/>* specify apps with Select apps.|
 | Sign-in risk | An indicator of the likelihood (high, medium, or low) that a sign-in wasn't made by the legitimate owner of a user account. To use this condition, you need to have Azure Active Directory Identity Protection enabled. |
-| Device platforms | Operating system on a client. Supports the following device platforms:<br/>• Android<br/>• iOS<br/>• Windows Phone<br/>• Windows<br/>• macOS |
+| Device platforms | Operating system on a client. Supports the following device platforms:<br/>* Android<br/>* iOS<br/>* Windows Phone<br/>* Windows<br/>* macOS |
 | Device state | The device state condition excludes hybrid Azure AD joined devices and devices marked as compliant from a Conditional Access policy. This condition is useful when a policy should apply only to an unmanaged device to provide additional session security. For example, only enforce the Microsoft Cloud App Security session control when a device is unmanaged. |
-| Locations | Based on where a connection was attempted. Common use cases for this condition are policies with the following protections:<br/>• Require multi-factor authentication for users accessing a service when they're off the corporate network.<br/>• Block access for users accessing a service from specific countries or regions.|
-| Client apps | By default, a Conditional Access policy applies to the following apps:<br/>• Browser apps<br/>• Mobile and desktop apps using modern authentication<br/>Additionally, you can target a policy to specific client apps that are not using modern authentication, for example:<br/>• Exchange ActiveSync clients<br/>• Other clients<br/>Common use cases for this condition are policies with the following requirements:<br/>• Require a managed device<br/>• Block legacy authentication<br/>You can only select Exchange ActiveSync clients if:<br/>• Microsoft Office 365 Exchange Online is the only cloud app you've selected.<br/>• You don't have other conditions configured in a policy. However, you can narrow down the scope of this condition to apply only to supported platforms.|
+| Locations | Based on where a connection was attempted. Common use cases for this condition are policies with the following protections:<br/>* Require multi-factor authentication for users accessing a service when they're off the corporate network.<br/>* Block access for users accessing a service from specific countries or regions.|
+| Client apps | By default, a Conditional Access policy applies to the following apps:<br/>* Browser apps<br/>* Mobile and desktop apps using modern authentication<br/>Additionally, you can target a policy to specific client apps that are not using modern authentication, for example:<br/>* Exchange ActiveSync clients<br/>* Other clients<br/>Common use cases for this condition are policies with the following requirements:<br/>* Require a managed device<br/>* Block legacy authentication<br/>You can only select Exchange ActiveSync clients if:<br/>* Microsoft Office 365 Exchange Online is the only cloud app you've selected.<br/>* You don't have other conditions configured in a policy. However, you can narrow down the scope of this condition to apply only to supported platforms.|
 
 ## Implement and manage hybrid identities
 
 * [install Azure AD Connect](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/how-to-connect-install-custom), including password hash and pass-through synchronization
+  * RDP to AD Server and download AD Connect from Portal
 * use Azure AD Connect to configure federation with on-premises Active Directory Domain Services (AD DS)
 * manage Azure AD Connect
 * manage password sync and password writeback
@@ -81,16 +82,16 @@
 
 | **Domain Services** | |
 |----|----|
-| Azure AD (AAD) | • Modern AD service built directly for the cloud<br/>• Often the same as O365 directory service<br/>• Can sync with On-prem directory service<br/>• Enterprise Identity Solution<br/>• Single Sign-on<br/>• Multi-factor Authentication (MFA)<br/>• Self-service (i.e. password reset) |
-| Active Directory Domain Services (ADDS) | • Legacy Active Directory since Windows 2000<br/>• Traditional Kerberos and LDAP functionality<br/>• Deployed on Windows OS usually on VMs |
-| Azure Active Directory Domain Services (AADDS) | • Provides managed domain services<br/>• Allows you to consume domain services w/o the need to patch and maintain domain controllers on IaaS<br/>All supported: <br/>• Domain Join<br/>• Group Policy<br/>• LDAP<br/>• Kerberos<br/>• NTLM |
+| Azure AD (AAD) | * Modern AD service built directly for the cloud<br/>* Often the same as O365 directory service<br/>* Can sync with On-prem directory service<br/>* Enterprise Identity Solution<br/>* Single Sign-on<br/>* Multi-factor Authentication (MFA)<br/>* Self-service (i.e. password reset) |
+| Active Directory Domain Services (ADDS) | * Legacy Active Directory since Windows 2000<br/>* Traditional Kerberos and LDAP functionality<br/>* Deployed on Windows OS usually on VMs |
+| Azure Active Directory Domain Services (AADDS) | * Provides managed domain services<br/>* Allows you to consume domain services w/o the need to patch and maintain domain controllers on IaaS<br/>All supported: <br/>* Domain Join<br/>* Group Policy<br/>* LDAP<br/>* Kerberos<br/>* NTLM |
 
 | AD Scenario | |
 |----|----|
-| Cloud-only | • Users and Groups are managed in Azure Active Directory only<br/> • Azure AD stores the password (encrypted) |
-| Hybrid AD w/password sync | • On-premises Active Directory is the « master » <br/> • Users and Groups are synchronized to Azure Active Directory using ADConnect (or MIM or 3rd party)<br/> • Password is synced encrypted out of ADConnect (or MIM or 3rd party) |
-| Hybrid AD w/Federation | • Relies on ADConnect to synchronize objects<br/> • ADFS or 3rd party Federation engine, running on-premises or in Azure VMs (with S2S or ER)|
-| Hybrid AD w/PassThrough Authentication | • Relies on ADConnect to synchronize objects<br/> • Instead of ADFS federation, deploy the PTA agents on on-premises servers (ADDS DCs)|
+| Cloud-only | * Users and Groups are managed in Azure Active Directory only<br/> * Azure AD stores the password (encrypted) |
+| Hybrid AD w/password sync | * On-premises Active Directory is the « master » <br/> * Users and Groups are synchronized to Azure Active Directory using ADConnect (or MIM or 3rd party)<br/> * Password is synced encrypted out of ADConnect (or MIM or 3rd party) |
+| Hybrid AD w/Federation | * Relies on ADConnect to synchronize objects<br/> * ADFS or 3rd party Federation engine, running on-premises or in Azure VMs (with S2S or ER)|
+| Hybrid AD w/PassThrough Authentication | * Relies on ADConnect to synchronize objects<br/> * Instead of ADFS federation, deploy the PTA agents on on-premises servers (ADDS DCs)|
 
 **Active Directory Pricing Details**
 

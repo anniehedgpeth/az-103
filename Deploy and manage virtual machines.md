@@ -126,7 +126,7 @@ Export-AzResourceGroup
 
 | Supported | Details |
 |----|----|
-| Replication scenarios | • Replicate Azure VMs from one Azure region to another. <br/>• Replicate on-premises VMware VMs, Hyper-V VMs, physical servers (Windows and Linux), Azure Stack VMs to Azure.<br/>• Replicate AWS Windows instances to Azure.<br/>• Replicate on-premises VMware VMs, Hyper-V VMs managed by System Center VMM, and physical servers to a secondary site.|
+| Replication scenarios | * Replicate Azure VMs from one Azure region to another. <br/>* Replicate on-premises VMware VMs, Hyper-V VMs, physical servers (Windows and Linux), Azure Stack VMs to Azure.<br/>* Replicate AWS Windows instances to Azure.<br/>* Replicate on-premises VMware VMs, Hyper-V VMs managed by System Center VMM, and physical servers to a secondary site.|
 | Regions | Review supported regions for Site Recovery. |
 | Replicated machines | Review the replication requirements for Azure VM replication, on-premises VMware VMs and physical servers, and on-premises Hyper-V VMs. |
 | Workloads | You can replicate any workload running on a machine that's supported for replication. In addition, the Site Recovery team have performed app-specific testing for a number of apps. |

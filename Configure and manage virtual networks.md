@@ -53,9 +53,9 @@ _Understand the costs:_
 
 | **Peering - Data to Collect** | |
 |----|----|
-| **Azure Private Peering** | • Peering subnet for path 1 (/30)<br/>• Peering subnet for path 2 (/30)<br/>• VLAN ID for peering<br/>• ASN for peering<br/>• ExpressRoute ASN = 12076<br/>• MD5 Hash (optional)|
-| **Azure Public Peering** | • Peering sunet for path 1 (/30) - must be public IP<br/>• Peering subnet for path 2 (/30) - must be public IP<br/>• VLAN ID for peering<br/>• ASN for peering<br/>• ExpressRoute ASN = 12076<br/>• MD5 Hash (optional) |
-| **Mircosoft Peering** | • Peering subnet for path 1 (/30) - must be public IP<br/>• Peering subnet for path 2 (/30) - must be public IP<br/>• VLAN ID for peering<br/>• ASN for peering<br/>• Advertised prefixes - must be public IP prefixes<br/>• Customer ASN (optional if different from peering ASN)<br/>• RIR/IRR for IP and ASN validation<br/>• ExpressRoute ASN = 12076<br/>• MD5 Hash (optional) |
+| **Azure Private Peering** | * Peering subnet for path 1 (/30)<br/>* Peering subnet for path 2 (/30)<br/>* VLAN ID for peering<br/>* ASN for peering<br/>* ExpressRoute ASN = 12076<br/>* MD5 Hash (optional)|
+| **Azure Public Peering** | * Peering sunet for path 1 (/30) - must be public IP<br/>* Peering subnet for path 2 (/30) - must be public IP<br/>* VLAN ID for peering<br/>* ASN for peering<br/>* ExpressRoute ASN = 12076<br/>* MD5 Hash (optional) |
+| **Mircosoft Peering** | * Peering subnet for path 1 (/30) - must be public IP<br/>* Peering subnet for path 2 (/30) - must be public IP<br/>* VLAN ID for peering<br/>* ASN for peering<br/>* Advertised prefixes - must be public IP prefixes<br/>* Customer ASN (optional if different from peering ASN)<br/>* RIR/IRR for IP and ASN validation<br/>* ExpressRoute ASN = 12076<br/>* MD5 Hash (optional) |
 
 **VPN Gateway SKUs**
 
@@ -68,8 +68,8 @@ _Understand the costs:_
 
 | **Unlimited versus Metered** | |
 |----|----|
-| **Unlimited** | • Speeds from 50 Mbps to 10 Gbps<br/>• Unlimited Inbound data transfer<br/>• Unlimited Outbound data transfer<br/>• Higher monthly fee |
-| **Metered** | • Speeds from 50 Mbps to 10 Gbps<br/>• Unlimited Inbound data transfer<br/>• Outbound data transfer charged at a predetermined rate per GB<br/>• Lower monthly fee |
+| **Unlimited** | * Speeds from 50 Mbps to 10 Gbps<br/>* Unlimited Inbound data transfer<br/>* Unlimited Outbound data transfer<br/>* Higher monthly fee |
+| **Metered** | * Speeds from 50 Mbps to 10 Gbps<br/>* Unlimited Inbound data transfer<br/>* Outbound data transfer charged at a predetermined rate per GB<br/>* Lower monthly fee |
 
 ## Implement and manage virtual networking
 
@@ -184,8 +184,8 @@ Set-AzNetworkInterface -NetworkInterface $Nic
 
 | **Load Balancing Options:** | Key Features |
 |----|----|
-| Azure Load Balancer | • Layer 4 Transport<br/> • Basic and Standard (Preview) SKUs<br/> • Service Monitoring<br/> • Automated Reconfiguration<br/> • Hash based distribution<br/> • Interal and Public Options |
-| Application Gateway | • Layer 7 Application Load Balancing<br/> • Cookie based session affinity <br/> • SSL Offload<br/> • End to End SSL<br/> • Web Application Firewall<br/> • URL Based Content Routing<br/> • Requires its own subnet |
+| Azure Load Balancer | * Layer 4 Transport<br/> * Basic and Standard (Preview) SKUs<br/> * Service Monitoring<br/> * Automated Reconfiguration<br/> * Hash based distribution<br/> * Interal and Public Options |
+| Application Gateway | * Layer 7 Application Load Balancing<br/> * Cookie based session affinity <br/> * SSL Offload<br/> * End to End SSL<br/> * Web Application Firewall<br/> * URL Based Content Routing<br/> * Requires its own subnet |
 
 ![](screenshots/7-layers-of-osi-icon.jpg)
 

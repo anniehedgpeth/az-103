@@ -170,11 +170,11 @@ Subscription ---> Resource Groups ---> Resources
 
 | HOT | COLD | ARCHIVE |
 |----|----|----|
-| • Higher storage costs<br/>• Lower access costs | • Lower storage costs<br/>• Higher access costs<br/>• Intended for data that will remain cool for 30 days or more |  • Lower storage costs<br/>• Highest retrieval costs<br/>• When a blob is in archive storage, it is offline and cannot be read |
+| * Higher storage costs<br/>* Lower access costs | * Lower storage costs<br/>* Higher access costs<br/>* Intended for data that will remain cool for 30 days or more |  * Lower storage costs<br/>* Highest retrieval costs<br/>* When a blob is in archive storage, it is offline and cannot be read |
 
 | BLOBS | FILES | DISKS |
 |----|----|----|
-| • Access application data from anywhere<br/>• Large amount of objects to store - images, videos, etc. | • Access files across multiple machines<br/>• Jumpbox scenarios for shared development scenarios | • Do not need to access the data outside the VM<br/>• Lift-and-shift machines from on-premises<br/>• Disk expansion for application installations |
+| * Access application data from anywhere<br/>* Large amount of objects to store - images, videos, etc. | * Access files across multiple machines<br/>* Jumpbox scenarios for shared development scenarios | * Do not need to access the data outside the VM<br/>* Lift-and-shift machines from on-premises<br/>* Disk expansion for application installations |
 
 | Storage account type | Supported services | Supported performance tiers | Supported access tiers | Replication options | Deployment model | Encryption |
 |----|----|----|----|----|----|----|
@@ -214,7 +214,7 @@ Subscription ---> Resource Groups ---> Resources
 
 | import/export service | command-line tool | disk drives |
 |----|----|----|
-| > accessed via the Azure Portal<br/>> used to track data:<br/>• import (upload) jobs<br/>• export (download) jobs | > prepare disk drives that are shipped<br/>> copy data to your drive<br/>> encrypts data with BitLocker<br/>> generates drive journal files<br/>> determines number of drives<br/>> use V1 for blob and V2 for files | > disk drives: <br/>• HDDs<br/>• SSDs<br/>• import jobs: you ship drives containing your data<br/>• export jobs: you ship empty drives |
+| > accessed via the Azure Portal<br/>> used to track data:<br/>* import (upload) jobs<br/>* export (download) jobs | > prepare disk drives that are shipped<br/>> copy data to your drive<br/>> encrypts data with BitLocker<br/>> generates drive journal files<br/>> determines number of drives<br/>> use V1 for blob and V2 for files | > disk drives: <br/>* HDDs<br/>* SSDs<br/>* import jobs: you ship drives containing your data<br/>* export jobs: you ship empty drives |
 
   * disk drives
     * HDDs
