@@ -60,10 +60,10 @@ _Understand the costs:_
 **VPN Gateway SKUs**
 | SKU | S2S/<br/>VNET-to-VNET<br/>Tunnels | P2S<br/>Connections | Aggregrate<br/>Throughput<br/>Benchmark | Recommended<br/>Workloads | Features |
 |----|----|----|----|----|----|
-| **VpnGw1** | Max 30 | Max 128 | 650 Mbps | Production,<br/>critical workloads | **Route-based VPN:**<br/>up to 30 tunnels<br/>P2S<br/>BGP<br/>active-active<br/>custom IPsec/IKE policy<br/>ExpressRoute/VPN co-existence
-| **VpnGw2** | Max 30 | Max 128 | 1 Gbps | Production,<br/>critical workloads |**Route-based VPN:**<br/>up to 30 tunnels<br/>P2S<br/>BGP<br/>active-active<br/>custom IPsec/IKE policy<br/>ExpressRoute/VPN co-existence
-| **VpnGw3** | Max 30 | Max 128 | 1.25 Gbps | Production,<br/>critical workloads |**Route-based VPN:**<br/>up to 30 tunnels<br/>P2S<br/>BGP<br/>active-active<br/>custom IPsec/IKE policy<br/>ExpressRoute/VPN co-existence
-| **Basic** | Max 10 | Max 128 | 100 Mbps | Dev-tst or POC | **Route-based VPN:**<br/>10 tunnels with P2S<br/>no RADIUS authentication for P2S<br/>no IKEv2 for P2S<br/>**Policy-based VPN:**<br/> (IKEv1): 1 tunnel<br/>no P2S
+| **VpnGw1** | Max 30 | Max 128 | 650 Mbps | Production,<br/>critical workloads | **Route-based VPN:**<br/>up to 30 tunnels<br/>P2S<br/>BGP<br/>active-active<br/>custom IPsec/IKE policy<br/>ExpressRoute/VPN co-existence |
+| **VpnGw2** | Max 30 | Max 128 | 1 Gbps | Production,<br/>critical workloads |**Route-based VPN:**<br/>up to 30 tunnels<br/>P2S<br/>BGP<br/>active-active<br/>custom IPsec/IKE policy<br/>ExpressRoute/VPN co-existence |
+| **VpnGw3** | Max 30 | Max 128 | 1.25 Gbps | Production,<br/>critical workloads |**Route-based VPN:**<br/>up to 30 tunnels<br/>P2S<br/>BGP<br/>active-active<br/>custom IPsec/IKE policy<br/>ExpressRoute/VPN co-existence |
+| **Basic** | Max 10 | Max 128 | 100 Mbps | Dev-tst or POC | **Route-based VPN:**<br/>10 tunnels with P2S<br/>no RADIUS authentication for P2S<br/>no IKEv2 for P2S<br/>**Policy-based VPN:**<br/> (IKEv1): 1 tunnel<br/>no P2S |
 
 | **Unlimited versus Metered** | |
 |----|----|
