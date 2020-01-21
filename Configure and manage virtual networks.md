@@ -58,6 +58,7 @@ _Understand the costs:_
 | **Mircosoft Peering** | • Peering subnet for path 1 (/30) - must be public IP<br/>• Peering subnet for path 2 (/30) - must be public IP<br/>• VLAN ID for peering<br/>• ASN for peering<br/>• Advertised prefixes - must be public IP prefixes<br/>• Customer ASN (optional if different from peering ASN)<br/>• RIR/IRR for IP and ASN validation<br/>• ExpressRoute ASN = 12076<br/>• MD5 Hash (optional) |
 
 **VPN Gateway SKUs**
+
 | SKU | S2S/<br/>VNET-to-VNET<br/>Tunnels | P2S<br/>Connections | Aggregrate<br/>Throughput<br/>Benchmark | Recommended<br/>Workloads | Features |
 |----|----|----|----|----|----|
 | **VpnGw1** | Max 30 | Max 128 | 650 Mbps | Production,<br/>critical workloads | **Route-based VPN:**<br/>up to 30 tunnels<br/>P2S<br/>BGP<br/>active-active<br/>custom IPsec/IKE policy<br/>ExpressRoute/VPN co-existence |
