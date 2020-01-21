@@ -102,6 +102,7 @@ Export-AzResourceGroup
   - Ensure you have a proper way to write data from cache to persistent disks
 
 **Default and Allowed Settings**
+
 | Disk Type | Default Cache Setting | Allowed Settings |
 |----|----|----|
 | OS Disk | Read-Write | Read-Only or Read-Write |
