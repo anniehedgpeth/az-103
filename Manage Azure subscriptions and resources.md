@@ -6,8 +6,137 @@
   * [how to transfer billing ownership](https://docs.microsoft.com/en-us/azure/billing/billing-subscription-transfer)
   * [how to associate or add a subscription to your AAD tenant](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-subscriptions-associated-directory)
 * configure cost center quotas and tagging
+  * Tagging
+    * Limitations
+      * Not all resource types support tags. To determine if you can apply a tag to a resource type, see Tag support for Azure resources.
+      * Each resource or resource group can have a maximum of 50 tag name/value pairs. If you need to apply more tags than the maximum allowed number, use a JSON string for the tag value. The JSON string can contain many values that are applied to a single tag name. A resource group can contain many resources that each have 50 tag name/value pairs.
+      * The tag name is limited to 512 characters, and the tag value is limited to 256 characters. For storage accounts, the tag name is limited to 128 characters, and the tag value is limited to 256 characters.
+      * Generalized VMs don't support tags.
+      * Tags applied to the resource group are not inherited by the resources in that resource group.
+      * Tags can't be applied to classic resources such as Cloud Services.
+      * Tag names can't contain these characters: <, >, %, &, \, ?, /
+      * Currently Azure DNS zones and Traffic Manger services also don't allow the use of spaces in the tag.
+      * Requires contributor role
+      * Every time you apply tags to a resource or a resource group, you overwrite the existing tags on that resource or resource group. Therefore, you must use a different approach based on whether the resource or resource group has existing tags.
+    * You can use Azure Policy to enforce tagging rules and conventions and that applies the needed tags during deployment.
+    * Commands
+
+    ```POWERSHELL
+    # All examples in POWERSHELL and then AZ CLI
+
+    # To get the existing tags in a resource group
+    (Get-AzResourceGroup -Name examplegroup).Tags
+
+    az group show -n examplegroup --query tags
+
+    # To get the tags for a resource that has a specified name and resource group
+    (Get-AzResource -ResourceName examplevnet -ResourceGroupName examplegroup).Tags
+
+    az resource show -n examplevnet -g examplegroup --resource-type "Microsoft.Network/virtualNetworks" --query tags
+
+    # To get the tags using the resource id
+    (Get-AzResource -ResourceId /subscriptions/<subscription-id>/resourceGroups/<rg-name>/providers/Microsoft.Storage/storageAccounts/<storage-name>).Tags
+
+    az resource show --id <resource-id> --query tags
+
+    # To get resource groups that have a specific tag name and value
+    (Get-AzResourceGroup -Tag @{ "Dept"="Finance" }).ResourceGroupName
+
+    az group list --tag Dept=IT
+
+    # To get resources that have a specific tag name and value
+    (Get-AzResource -Tag @{ "Dept"="Finance"}).Name
+
+    az resource list --tag Dept=Finance
+
+    # To add tags to a resource group without existing tags
+    Set-AzResourceGroup -Name examplegroup -Tag @{ "Dept"="IT"; "Environment"="Test" }
+    az group update -n examplegroup --tags 'Environment=Test' 'Dept=IT'
+
+    # To add tags to a resource goup that has existing tags, retrieve the existing tags, add the new tag, and reapply the tags
+    $tags = (Get-AzResourceGroup -Name examplegroup).Tags
+    $tags.Add("Status", "Approved")
+    Set-AzResourceGroup -Tag $tags -Name examplegroup
+
+    az group update -n examplegroup --set tags.'Status'='Approved'
+
+    # To add tags to a resource without existing tags
+    $resource = Get-AzResource -ResourceName examplevnet -ResourceGroupName examplegroup
+    Set-AzResource -Tag @{ "Dept"="IT"; "Environment"="Test" } -ResourceId $resource.ResourceId -Force
+
+    az resource tag --tags 'Dept=IT' 'Environment=Test' -g examplegroup -n examplevnet --resource-type "Microsoft.Network/virtualNetworks"
+
+    # To apply all tags from a resource group to its resources, and not keep existing tags on the resources
+    $group = Get-AzResourceGroup -Name examplegroup
+    Get-AzResource -ResourceGroupName $group.ResourceGroupName | ForEach-Object {Set-AzResource -ResourceId $_.ResourceId -Tag $group.Tags -Force }
+
+    jsontags=$(az group show --name examplegroup --query tags -o json)
+    tags=$(echo $jsontags | tr -d '"{},' | sed 's/: /=/g')
+    resourceids=$(az resource list -g examplegroup --query [].id --output tsv)
+    for id in $resourceids
+    do
+      az resource tag --tags $tags --id $id
+    done
+
+    # To apply all tags from a resource group to its resources, and keep existing tags on resources that aren't duplicates
+    $group = Get-AzResourceGroup -Name examplegroup
+    if ($null -ne $group.Tags) {
+        $resources = Get-AzResource -ResourceGroupName $group.ResourceGroupName
+        foreach ($r in $resources)
+        {
+            $resourcetags = (Get-AzResource -ResourceId $r.ResourceId).Tags
+            if ($resourcetags)
+            {
+                foreach ($key in $group.Tags.Keys)
+                {
+                    if (-not($resourcetags.ContainsKey($key)))
+                    {
+                        $resourcetags.Add($key, $group.Tags[$key])
+                    }
+                }
+                Set-AzResource -Tag $resourcetags -ResourceId $r.ResourceId -Force
+            }
+            else
+            {
+                Set-AzResource -Tag $group.Tags -ResourceId $r.ResourceId -Force
+            }
+        }
+    }
+
+    jsontags=$(az group show --name examplegroup --query tags -o json)
+    tags=$(echo $jsontags | tr -d '"{},' | sed 's/: /=/g')
+
+    resourceids=$(az resource list -g examplegroup --query [].id --output tsv)
+    for id in $resourceids
+    do
+      resourcejsontags=$(az resource show --id $id --query tags -o json)
+      resourcetags=$(echo $resourcejsontags | tr -d '"{},' | sed 's/: /=/g')
+      az resource tag --tags $tags$resourcetags --id $id
+    done
+    ```
+
 * configure policies at Azure subscription level
   * [How many Azure subscriptions is enough?](https://blogs.technet.microsoft.com/tangent_thoughts/2017/10/17/how-many-azure-subscriptions-is-enough-aka-msazuresubscriptions/)
+  * **Management Groups:** If your organization has many subscriptions, you may need a way to efficiently manage access, policies, and compliance for those subscriptions. Azure management groups provide a level of scope above subscriptions. You organize subscriptions into containers called "management groups" and apply your governance conditions to the management groups. All subscriptions within a management group automatically inherit the conditions applied to the management group. Management groups give you enterprise-grade management at a large scale no matter what type of subscriptions you might have. All subscriptions within a single management group must trust the same Azure Active Directory tenant.
+    * 10,000 management groups can be supported in a single directory.
+    * A management group tree can support up to six levels of depth.
+      * This limit doesn't include the Root level or the subscription level.
+    * Each management group and subscription can only support one parent.
+    * Each management group can have many children.
+    * All subscriptions and management groups are within a single hierarchy in each directory.
+    * The root management group can't be moved or deleted, unlike other management groups.
+    * The following chart shows the list of roles and the supported actions on management groups.
+
+| RBAC Role Name | Create | Rename | Move** | Delete | Assign Access | Assign Policy | Read|
+|----|----|----|----|----|----|----|----|
+| Owner | X | X | X | X | X | X | X|
+| Contributor | X | X | X | X |  |  | X|
+| MG Contributor* | X | X | X | X |  |  | X|
+| Reader |  |  |  |  |  |  | X|
+| MG Reader* |  |  |  |  |  |  | X|
+| Resource Policy Contributor |  |  |  |  |  | X | |
+| User Access Administrator |  |  |  |  | X | X | |
+
 
 ## Analyze resource utilization and consumption
 
@@ -28,6 +157,11 @@
           # These are the same
           Event | search "error"
           search in (Event) "error"
+
+          # Operators
+          == or =~ # case-sensitive "equal to" condition
+          <> or != # not equal to
+          | # line break
           ```
 
           | Uri | IP | Ports |

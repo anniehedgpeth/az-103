@@ -160,6 +160,10 @@ Set-AzNetworkInterface -NetworkInterface $Nic
   * Can communicate with Azure InternalLoad Balancer and/or Application Gateway
   * Cannot combineexternal and internal traffic at the sametime
   * Use Network Address Translation (NAT) to reach the VMs
+    * Azure uses source network address translation (SNAT) to perform this function. When multiple private IP addresses are masquerading behind a single public IP address, Azure uses port address translation (PAT) to masquerade private IP addresses. Ephemeral ports are used for PAT and are preallocated based on pool size.
+      * Minimizes the number of Azure public IP addresses required
+      * Obfuscates any management ports on the VMs
+      * Load balances traffic accross the VMs if they are identically configured
   * Obfuscates any management ports on the VMs
 * troubleshoot load balancing
   * Network Watcher

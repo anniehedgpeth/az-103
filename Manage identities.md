@@ -84,9 +84,13 @@
 |----|----|
 | Azure AD (AAD) | * Modern AD service built directly for the cloud<br/>* Often the same as O365 directory service<br/>* Can sync with On-prem directory service<br/>* Enterprise Identity Solution<br/>* Single Sign-on<br/>* Multi-factor Authentication (MFA)<br/>* Self-service (i.e. password reset) |
 | Active Directory Domain Services (ADDS) | * Legacy Active Directory since Windows 2000<br/>* Traditional Kerberos and LDAP functionality<br/>* Deployed on Windows OS usually on VMs |
-| Azure Active Directory Domain Services (AADDS) | * Provides managed domain services<br/>* Allows you to consume domain services w/o the need to patch and maintain domain controllers on IaaS<br/>All supported: <br/>* Domain Join<br/>* Group Policy<br/>* LDAP<br/>* Kerberos<br/>* NTLM |
+| Azure Active Directory Domain Services (AADDS) | * Provides managed domain services<br/>* Allows you to consume domain services w/o the need to patch and maintain domain controllers on IaaS<br/>All supported: <br/>* Domain Join<br/>* Group Policy^<br/>* LDAP<br/>* Kerberos<br/>* NTLM |
 
-| AD Scenario | |
+^ To configure the Group Policy Object (GPO) for Single-Sign On (SSO) you need to configure the **Site to Zone Assignment List** setting to establish the URL to which Kerberos tickets are forwarded when the user tries to sign on to Office 365 applications. You need to cofigure https://autologon.microsoftazuread-sso.com as an intranet zone, because Kerberos tickets are not sent to cloud endpoints.
+
+^ You should also configure the **Allow** updates to status bar via script policy for the Intranet Zone. When the use tries to access an Office 365 application, Seamless SSO uses JavaScript scripts to run all requests in the background. These JavaScript scripts also need to update the status bar of the user's browser. You need to configure this setting for the Intranet Zone because you need your clients to send Kerberos tickets.
+
+| **AD Scenario** | |
 |----|----|
 | Cloud-only | * Users and Groups are managed in Azure Active Directory only<br/> * Azure AD stores the password (encrypted) |
 | Hybrid AD w/password sync | * On-premises Active Directory is the « master » <br/> * Users and Groups are synchronized to Azure Active Directory using ADConnect (or MIM or 3rd party)<br/> * Password is synced encrypted out of ADConnect (or MIM or 3rd party) |

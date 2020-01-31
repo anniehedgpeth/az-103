@@ -45,6 +45,13 @@ Export-AzResourceGroup
       [<CommonParameters>]
 ```
 
+```Powershell
+New-AzResourceGroupDeployment
+      [-Mode]
+      # "incremental" to leave existing resources in the RG and add the resources in the template to the RG
+      # "complete" to exclude any resources that are not included in the template so that they are deleted
+```
+
   * The parameters file exported contains the parameters that were used during that deployment.
   * The template contains needed scripts for deploying the template. When you download an ARM template from a deployment or a resource group, the downloaded package contains 7 files:
     * the ARM template,
